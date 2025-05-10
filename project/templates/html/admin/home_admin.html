@@ -1,0 +1,452 @@
+{# templates/admin/home_admin.html #}
+{% extends "html/admin/base_admin.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>AI-Powered Sales Forecasting & Dynamic Pricing</h1>
+            <p class="subtitle">Optimize your pricing strategy with real-time demand predictions and gamified decision-making</p>
+            <div class="cta-buttons">
+                <a href="{% url 'predict' %}" class="btn-primary">Try Pricing Tool</a>
+                <a href="{% url 'demand' %}" class="btn-secondary">View Demand Forecast</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'img/home.png' %}" alt="Sales Analytics Illustration">
+        </div>
+    </section>
+
+    <!-- Project Phases Overview -->
+    <section class="phases-section">
+        <h2>Our Comprehensive Solution</h2>
+        <div class="phases-grid">
+            <!-- Phase 1 -->
+            <div class="phase-card">
+                <div class="phase-number">1</div>
+                <h3>Data Collection & Feature Engineering</h3>
+                <ul>
+                    <li>Historical sales data integration</li>
+                    <li>External factor analysis</li>
+                    <li>Advanced feature creation</li>
+                </ul>
+            </div>
+            
+            <!-- Phase 2 -->
+            <div class="phase-card">
+                <div class="phase-number">2</div>
+                <h3>Demand Prediction Models</h3>
+                <ul>
+                    <li>Time series forecasting</li>
+                    <li>Machine learning integration</li>
+                    <li>API deployment</li>
+                </ul>
+            </div>
+            
+            <!-- Phase 3 -->
+            <div class="phase-card">
+                <div class="phase-number">3</div>
+                <h3>Dynamic Pricing Engine</h3>
+                <ul>
+                    <li>Real-time price adjustments</li>
+                    <li>Competitor price tracking</li>
+                    <li>Reinforcement learning</li>
+                </ul>
+            </div>
+            
+            <!-- Phase 4 -->
+            <div class="phase-card">
+                <div class="phase-number">4</div>
+                <h3>Gamified Decision Making</h3>
+                <ul>
+                    <li>Interactive simulations</li>
+                    <li>Leaderboards & challenges</li>
+                    <li>Scenario-based training</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="features-section">
+        <h2>Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Advanced Forecasting</h3>
+                <p>Combine ARIMA, Prophet, XGBoost, and LSTM models for accurate demand predictions.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Real-Time Pricing</h3>
+                <p>Dynamic adjustments based on demand, inventory, and competitor pricing.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3>Gamification</h3>
+                <p>Engaging challenges to test your pricing strategies against AI and peers.</p>
+            </div>
+            
+
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section class="tech-section">
+        <h2>Technology Stack</h2>
+        <div class="tech-grid">
+            <div class="tech-category">
+                <h3>Data Processing</h3>
+                <div class="tech-items">
+                    <span>Pandas</span>
+                    <span>NumPy</span>
+                    <span>MySQL</span>
+                </div>
+            </div>
+            <div class="tech-category">
+                <h3>Data Visualization</h3>
+                <div class="tech-items">
+                    <span>Matplotlib</span>
+                    <span>Seaborn</span>
+                    <span>Plotly</span>
+                    <span>Dash</span>
+                </div>
+            </div>
+            <div class="tech-category">
+                <h3>Machine Learning</h3>
+                <div class="tech-items">
+                    <span>Scikit-Learn</span>
+                    <span>XGBoost</span>
+                    <span>LGBM</span>
+                    <span>LinearRegression</span>
+                    <span>RandomForest</span>
+                </div>
+            </div>
+            
+            <div class="tech-category">
+                <h3>Deployment</h3>
+                <div class="tech-items">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JS</span>
+                    <span>Django</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    /* Container Styles */
+    .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 2rem;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 3rem;
+        margin-bottom: 5rem;
+    }
+    
+    .hero-content {
+        flex: 1;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.8rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+        background: linear-gradient(90deg, #00bcd4, #3a7bd5);
+        background-clip:border-box ;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+        color: #d0d0ff;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+    
+    .cta-buttons {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: 0.8rem 1.5rem;
+        border-radius: 4px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary {
+        background-color: #00bcd4;
+        color: #0f0f1a;
+    }
+    
+    .btn-primary:hover {
+        background-color: #00a5bb;
+        transform: translateY(-2px);
+    }
+    
+    .btn-secondary {
+        background-color: transparent;
+        color: #00bcd4;
+        border: 1px solid #00bcd4;
+    }
+    
+    .btn-secondary:hover {
+        background-color: rgba(0, 188, 212, 0.1);
+        transform: translateY(-2px);
+    }
+    
+    .hero-image {
+        flex: 1;
+        padding: 2rem;
+    }
+    
+    .hero-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    /* Sections Headings */
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        position: relative;
+        padding-bottom: 1rem;
+    }
+    
+    h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #00bcd4, #3a7bd5);
+    }
+    
+    /* Phases Section */
+    .phases-section {
+        margin: 5rem 0;
+    }
+    
+    .phases-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    
+    .phase-card {
+        background: rgba(30, 30, 50, 0.5);
+        border-radius: 8px;
+        padding: 2rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+    }
+    
+    .phase-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0, 188, 212, 0.2);
+    }
+    
+    .phase-number {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #00bcd4, #3a7bd5);
+        color: #0f0f1a;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    
+    .phase-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: #00bcd4;
+    }
+    
+    .phase-card ul {
+        list-style-type: none;
+    }
+    
+    .phase-card ul li {
+        margin-bottom: 0.5rem;
+        position: relative;
+        padding-left: 1.5rem;
+    }
+    
+    .phase-card ul li::before {
+        content: '○';
+        position: absolute;
+        left: 0;
+        color: #00bcd4;
+    }
+    
+    /* Features Section */
+    .features-section {
+        margin: 5rem 0;
+    }
+    
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    
+    .feature-card {
+        background: rgba(30, 30, 50, 0.5);
+        border-radius: 8px;
+        padding: 2rem;
+        text-align: center;
+        transition: transform 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .feature-icon {
+        font-size: 2.5rem;
+        color: #00bcd4;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-card p {
+        color: #d0d0ff;
+        line-height: 1.6;
+    }
+    
+    /* Technology Stack Section */
+    .tech-section {
+        margin: 5rem 0;
+    }
+    
+    .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    
+    .tech-category {
+        background: rgba(30, 30, 50, 0.5);
+        border-radius: 8px;
+        padding: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .tech-category h3 {
+        color: #00bcd4;
+        margin-bottom: 1.5rem;
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    
+    .tech-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        justify-content: center;
+    }
+    
+    .tech-items span {
+        background: rgba(0, 188, 212, 0.1);
+        color: #00bcd4;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+        .hero-section {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .cta-buttons {
+            justify-content: center;
+        }
+        
+        .hero-image {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .hero-content h1 {
+            font-size: 2.2rem;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
+
+{% block extra_js %}
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+    // Animation for phase cards on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        const phaseCards = document.querySelectorAll('.phase-card, .feature-card, .tech-category');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        phaseCards.forEach((card, index) => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

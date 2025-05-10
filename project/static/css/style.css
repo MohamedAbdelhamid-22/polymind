@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html, body {
+    height: 100%;
+  }
+  
+h1
+{
+    font-size: 50px;
+    margin-top: 0px;
+}
+.box{
+    border: solid;
+    width:180px;
+    text-align: center;
+    background-color:transparent;
+    border-radius:10px ;
+    align-content: center;
+    margin:auto;
+    background-color: white; 
+    border-color: transparent;
+    width: 350px;
+    height: 400px;
+    padding: 10px;
+    margin-top:100px ;
+    padding-top: 0px;
+    box-shadow: 5px 10px 8px #888888;
+} 
+
+#field1
+{
+    border-radius:20px ;
+    width:280px ;
+    height:40px ;
+    text-align: center;
+}
+#field2
+{
+    border-radius:20px ;
+    width:280px ;
+    height:40px ;
+    text-align: center;
+}
+input[type="submit"]
+{
+    width: 100px;
+    border-radius:5px ;
+    background-color:rgb(203, 121, 44);
+    font-size: larger;
+    color: white;
+}
+input:focus{
+    border: solid rgb(203,121,44);
+    outline: none;
+    box-shadow: 0px 0px 4px gray ;
+}

@@ -1,0 +1,161 @@
+{% extends 'html/admin/base_admin.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="page-title">Current Challenges</h1>
+
+        <!-- Table of Challenges -->
+        <table class="challenges-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Expected Result</th>
+                    <th>Points</th>
+                    <th>End Time</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for challenge in challenges %}
+                    <tr>
+                        <td>{{ challenge.title }}</td>
+                        <td>{{ challenge.description }}</td>
+                        <td>{{ challenge.expected_result }}</td>
+                        <td>{{ challenge.points }}</td>
+                        <td>{{ challenge.end_time|date:"F d, Y h:i A" }}</td>
+                        <td>
+                            {% if not challenge.is_ended %}
+                                <span class="status active">Active</span>
+                            {% else %}
+                                <span class="status ended">Ended</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if not challenge.is_ended %}
+                                <form action="{% url 'end_challenge' challenge.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn end-challenge-btn">End Challenge</button>
+                                </form>
+                            {% else %}
+                                <span class="status ended">Ended</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Footer Button -->
+        <div class="footer-btn">
+            <a href="{% url 'new_challenge' %}" class="btn new-challenge-btn">Create New Challenge</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_css %}
+    <style>
+        /* Container */
+        .container {
+            margin: 0 auto;
+            padding: 40px;
+            max-width: 1200px;
+        }
+
+        /* Page Title */
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #00bcd4;
+        }
+
+        /* Table Styling */
+        .challenges-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #1f1f2e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .challenges-table th,
+        .challenges-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .challenges-table th {
+            background-color: #222;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .challenges-table tbody tr:hover {
+            background-color: #333;
+        }
+
+        /* Status Styling */
+        .status {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .status.active {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .status.ended {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Button Styling */
+        .footer-btn {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 10px 20px; /* Smaller button */
+            background-color: #00bcd4;
+            color: white;
+            font-size: 1rem;  /* Adjust font size */
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;  /* Rounded button */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block; /* Align button properly */
+        }
+
+        .btn:hover {
+            background-color: #008c99;
+            transform: scale(1.05);  /* Slightly enlarge on hover */
+        }
+
+        .end-challenge-btn {
+            background-color: #f44336;
+            font-weight: bold;
+            border-radius: 30px; /* More rounded edges */
+            padding: 8px 16px; /* Smaller padding */
+            font-size: 0.9rem;  /* Smaller font size */
+        }
+
+        .end-challenge-btn:hover {
+            background-color: #e53935;
+            transform: scale(1.05);  /* Slightly enlarge on hover */
+        }
+
+        .new-challenge-btn {
+            margin-top: 30px;
+        }
+    </style>
+{% endblock %}

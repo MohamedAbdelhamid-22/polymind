@@ -1,0 +1,289 @@
+{% extends "html/user/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="challenge-container">
+    <div class="challenge-header">
+        <h1><i class="fas fa-trophy"></i> Current Challenges</h1>
+        <p>Test your forecasting skills against our AI and other players</p>
+        <p class="prediction-note">⚠️ You can submit only one prediction per challenge. Once submitted, it cannot be changed.</p>
+
+    </div>
+
+    <div class="challenges-list">
+        {% for challenge in challenges %}
+        <div class="challenge-card">
+            <div class="challenge-info">
+                <div class="challenge-badge">{{ forloop.counter }}</div>
+                <div>
+                    <h2>{{ challenge.title }}</h2>
+                    <p class="challenge-desc">{{ challenge.description }}</p>
+                    <div class="challenge-meta">
+                        <span><i class="fas fa-coins"></i> Reward: {{ challenge.points }} pts</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prediction-section">
+                <h3>Make Your Prediction</h3>
+                <form method="post" action="{% url 'submit_prediction' challenge.id %}" class="prediction-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="prediction-{{ challenge.id }}">Forecasted Sales:</label>
+                        <div class="input-group">
+                            <input type="number" id="prediction-{{ challenge.id }}" 
+                                   name="prediction" placeholder="Enter your sales prediction" required>
+                            <span class="input-unit">units</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-state">
+            <i class="fas fa-inbox"></i>
+            <p>No challenges available at the moment</p>
+            <a href="#" class="btn-notify">Notify me when available</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    /* Base Styles */
+    .challenge-container {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+    }
+
+    .challenge-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .challenge-header h1 {
+        font-size: 2.5rem;
+        color: #00bcd4;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+    }
+
+    .challenge-header p {
+        color: #d0d0ff;
+        font-size: 1.1rem;
+    }
+
+    .challenge-card {
+        background: rgba(28, 28, 46, 0.7);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .challenge-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 188, 212, 0.15);
+    }
+
+    .challenge-info {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .challenge-badge {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #00bcd4, #3a7bd5);
+        color: #0f0f1a;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    .challenge-card h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: #ffffff;
+    }
+
+    .challenge-desc {
+        color: #d0d0ff;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .challenge-meta {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .challenge-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #a0a0c0;
+        font-size: 0.9rem;
+    }
+
+    .prediction-section {
+        background: rgba(15, 15, 26, 0.5);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        border-top: 1px solid rgba(0, 188, 212, 0.2);
+    }
+
+    .prediction-section h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: #00bcd4;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .prediction-note {
+        color: #ffcc00;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        background: rgba(255, 204, 0, 0.1);
+        padding: 0.5rem 1rem;
+        border-left: 4px solid #ffcc00;
+        border-radius: 4px;
+    }
+
+    .prediction-form {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-end;
+    }
+
+    .form-group {
+        flex-grow: 1;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #d0d0ff;
+        font-size: 0.9rem;
+    }
+
+    .input-group {
+        position: relative;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        background: rgba(10, 10, 20, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .input-group input:focus {
+        outline: none;
+        border-color: #00bcd4;
+    }
+
+    .input-unit {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #a0a0c0;
+        font-size: 0.9rem;
+    }
+
+    .submit-btn {
+        background: linear-gradient(135deg, #00bcd4, #3a7bd5);
+        color: white;
+        border: none;
+        padding: 0.8rem 1.8rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+        background: rgba(28, 28, 46, 0.3);
+        border-radius: 12px;
+        border: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    .empty-state i {
+        font-size: 3rem;
+        color: #00bcd4;
+        margin-bottom: 1rem;
+    }
+
+    .empty-state p {
+        color: #d0d0ff;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-notify {
+        background: rgba(0, 188, 212, 0.1);
+        color: #00bcd4;
+        padding: 0.6rem 1.5rem;
+        border-radius: 20px;
+        text-decoration: none;
+        border: 1px solid #00bcd4;
+        transition: all 0.3s ease;
+    }
+
+    .btn-notify:hover {
+        background: rgba(0, 188, 212, 0.2);
+    }
+
+    @media (max-width: 768px) {
+        .challenge-info {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .prediction-form {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .submit-btn {
+            justify-content: center;
+        }
+    }
+</style>
+
+{% block extra_js %}
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+{% endblock %}
+{% endblock %}

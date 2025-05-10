@@ -1,0 +1,240 @@
+{# templates/admin/insights_admin.html #}
+{% extends "html/admin/base_admin.html" %}
+{% load static %}
+
+{% block title %}Sales Insights Dashboard{% endblock %}
+
+{% block content %}
+<style>
+    .insights-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        color: #d0d0ff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #121225;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Subtle shadow for overall container */
+        border-radius: 12px; /* Rounded corners for the container */
+    }
+
+    .insight-card {
+        background: linear-gradient(145deg, #1c1c2e, #2b2b3d); /* Gradient background for cards */
+        padding: 1.8rem;
+        border-radius: 18px; /* More rounded corners */
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-left: 4px solid #6a9eff;
+        position: relative;
+        overflow: hidden; /* Prevents child elements from overflowing */
+    }
+
+    .insight-card:hover {
+        transform: translateY(-10px); /* Slightly stronger hover effect */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .insight-card h2 {
+        color: #6a9eff;
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+        letter-spacing: 0.5px;
+        font-weight: bold;
+        text-transform: uppercase;
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+
+    .insight-card h2::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 50%;
+        height: 2px;
+        background: #6a9eff;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .insight-card:hover h2::after {
+        transform: scaleX(1); /* Underline animation on hover */
+    }
+
+    .insight-img-container {
+        margin: 1.5rem 0;
+        text-align: center; /* Ensures the image is centered horizontally */
+        background: #252540;
+        padding: 1.2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        display: flex;
+        justify-content: center; /* Centers the image horizontally */
+        align-items: center; /* Centers the image vertically */
+    }
+
+    .insight-img {
+        width: 100%;
+        max-width: 800px; /* Controls the maximum width of the image */
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: block; /* Removes any inline-block behavior */
+        margin: 0 auto; /* Ensures that the image stays centered in its container */
+    }
+
+    .insight-img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .img-caption {
+        color: #a0a0c0;
+        font-style: italic;
+        margin-top: 1rem;
+        font-size: 0.95rem;
+    }
+
+    .insight-text {
+        line-height: 1.7;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+        color: #e0e0e0;
+        position: relative;
+    }
+
+    .insight-text::before {
+        content: '“';
+        position: absolute;
+        top: -10px;
+        left: -20px;
+        font-size: 4rem;
+        color: #6a9eff;
+        opacity: 0.1;
+    }
+
+    .highlight {
+        color: #ff9e64;
+        font-weight: bold;
+        background-color: rgba(255, 158, 100, 0.1);
+        padding: 0.3rem 0.5rem;
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .highlight:hover {
+        transform: scale(1.1);
+    }
+
+    .insights-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+
+    h1{
+        margin-bottom: 2rem;
+    }
+    .insights-header h1 {
+        font-size: 2.4rem;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 700;
+    }
+
+    .insights-header p {
+        color: #a0a0c0;
+        font-size: 1rem;
+        max-width: 700px;
+        margin: 0 auto;
+        font-style: italic;
+    }
+</style>
+
+<div class="insights-container">
+    <h1>Sales Insights Dashboard</h1>
+    
+    <!-- Earthquake Impact Insight -->
+    <div class="insight-card">
+        <h2>Earthquake Impact Analysis</h2>
+        <img src="{% static 'img/insights_3.jpg' %}" alt="Sales before and after earthquake" class="insight-img">
+        <p class="insight-text">
+            The <span class="highlight">April 16, 2016 earthquake caused a sharp drop in sales</span>, with recovery taking approximately 
+            <span class="highlight">166 time periods</span> to return to pre-earthquake levels. This highlights the 
+            <span class="highlight">prolonged disruption to business operations</span> following the disaster.
+        </p>
+
+
+    </div>
+    
+    <!-- City Performance Insight -->
+    <div class="insight-card">
+        <h2>Regional Sales Distribution</h2>
+        <img src="{% static 'img/insights_2.jpg' %}" alt="Average sales by city" class="insight-img">
+        <p class="insight-text">
+            <span class="highlight">Quito and Cayambe lead in average sales</span>, outperforming other cities significantly. 
+            Coastal cities like Manta and Salinas exhibit <span class="highlight">moderate sales with potential seasonal influence</span>, 
+            while mountain and inland regions such as Riobamba and Puyo maintain <span class="highlight">consistently lower average sales</span> throughout the year.
+        </p>
+
+    </div>
+    
+    <!-- Store Type Performance -->
+    <div class="insight-card">
+        <h2>Store Type Performance</h2>
+        <img src="{% static 'img/insights_1.jpg' %}" alt="Total count by store type" class="insight-img">
+        <p class="insight-text">
+            <span class="highlight">Store Type D has the highest number of locations</span>, followed closely by Type C. 
+            Types E and B have the lowest counts, indicating a smaller presence in the market. 
+            <span class="highlight">Store distribution is skewed toward Types D and C</span>, suggesting these formats are more widely adopted.
+        </p>
+
+
+    </div>
+    
+    <!-- Yearly Trends -->
+    <div class="insight-card">
+        <h2>Annual Growth Patterns</h2>
+        <img src="{% static 'img/insights_5.jpg' %}" alt="Yearly sales trend" class="insight-img">
+        <p class="insight-text">
+            The <span class="highlight">2017 downturn marked a 60% drop</span> from the 2016 peak, reversing a multi-year growth trend. 
+            This significant decline may reflect lingering effects of the 2016 earthquake or other market disruptions.
+        </p>
+    </div>
+    
+    <!-- Monthly Trends -->
+    <div class="insight-card">
+        <h2>Seasonal Sales Patterns</h2>
+        <img src="{% static 'img/insights_4.jpg' %}" alt="Monthly sales trend" class="insight-img">
+        <p class="insight-text">
+            The <span class="highlight">April 2016 earthquake caused an unprecedented sales spike</span>, likely due to panic buying or inventory disruptions, 
+            followed by a <span class="highlight">sharp drop in June and July</span>, breaking the typical seasonal pattern. 
+            In contrast, <span class="highlight">2013–2015 and 2017 followed a clear seasonal trend</span> with consistent peaks in <span class="highlight">July and December</span>, 
+            indicating strong holiday and mid-year demand.
+        </p>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    // Animation for scroll-triggered fade-in effects
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.insight-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        cards.forEach(card => {
+            card.style.opacity = 0;
+            card.style.transition = 'opacity 0.6s ease';
+            observer.observe(card);
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

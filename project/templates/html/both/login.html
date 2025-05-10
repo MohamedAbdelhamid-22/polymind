@@ -1,0 +1,157 @@
+{% extends "html/both/base_no_nav.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Main login container */
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 120px);
+        padding: 2rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Login box styling */
+    .login-box {
+        background-color: rgba(28, 28, 46, 0.9);
+        padding: 2.5rem;
+        border-radius: 16px;
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0 10px 30px rgba(0, 188, 212, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+    }
+
+    .login-box h1 {
+        color: #00bcd4;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+    }
+
+    /* Form elements */
+    .login-box input[type="email"],
+    .login-box input[type="password"] {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 25px;
+        background-color: rgba(15, 15, 26, 0.7);
+        color: #ffffff;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .login-box input[type="email"]:focus,
+    .login-box input[type="password"]:focus {
+        outline: none;
+        border-color: #00bcd4;
+        box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.3);
+    }
+
+    .login-box input[type="submit"] {
+        width: 100%;
+        padding: 0.8rem;
+        background-color: #00bcd4;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .login-box input[type="submit"]:hover {
+        background-color: #0097a7;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 188, 212, 0.4);
+    }
+
+    /* Link styling */
+    .login-box p {
+        text-align: center;
+        color: #d0d0ff;
+        margin-top: 1.5rem;
+    }
+
+    .login-box a {
+        color: #00bcd4;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .login-box a:hover {
+        color: #ffffff;
+        text-decoration: underline;
+    }
+
+    /* Hide navbar for login page */
+    .navbar {
+        display: none;
+    }
+
+    /* Message alerts */
+    .alert {
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border-radius: 0.25rem;
+    }
+
+    .alert-error {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
+
+    .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .login-box {
+            padding: 1.5rem;
+        }
+        
+        .login-box h1 {
+            font-size: 1.8rem;
+        }
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-box">
+        <form action="{% url 'login_authentication' %}" method="post">
+            {% csrf_token %}
+            <h1>Login</h1>
+            
+            {% if messages %}
+                <div class="alert-messages">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <input type="email" name="mail" placeholder="Email" required autofocus>
+            <input type="password" name="pass" placeholder="Password" required>
+            <input type="submit" value="Log In">
+            
+            <p class="register-link">
+                Don't have an account? <a href="{% url 'signup' %}">Register</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

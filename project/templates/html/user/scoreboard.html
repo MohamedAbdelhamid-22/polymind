@@ -1,0 +1,112 @@
+{% extends "html/user/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="scoreboard-wrapper">
+
+    {% for challenge, results in challenge_results.items %}
+    <div class="scoreboard-header">
+        <h1><i class="fas fa-medal"></i> {{ challenge.title }} – Scoreboard</h1>
+        <p>Top forecasters for this challenge</p>
+    </div>
+
+    <div class="scoreboard-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>User Name</th>
+                    <th>Accuracy</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td class="ranking-number">{{ forloop.counter }}</td>
+                    <td>{{ result.user.username }}</td>
+                    <td>{{ result.accuracy }}%</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" style="text-align:center; color:#aaa;">No results yet for this challenge</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br><hr style="border: 1px solid #00bcd4;"><br>
+    {% endfor %}
+
+</div>
+
+<style>
+    .scoreboard-wrapper {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+    }
+
+    .scoreboard-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .scoreboard-header h1 {
+        font-size: 2.2rem;
+        color: #00bcd4;
+        margin-bottom: 0.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+    }
+
+    .scoreboard-header p {
+        color: #d0d0ff;
+        font-size: 1.05rem;
+    }
+
+    .scoreboard-table table {
+        width: 100%;
+        border-collapse: collapse;
+        background: rgba(28, 28, 46, 0.7);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    table th, table td {
+        padding: 1rem;
+        text-align: center;
+        color: #d0d0ff;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    table th {
+        background-color: rgba(0, 188, 212, 0.2);
+        font-weight: 500;
+        color: #00bcd4;
+    }
+
+    table tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    table tr:hover {
+        background-color: rgba(0, 188, 212, 0.1);
+    }
+
+    .ranking-number {
+        font-weight: bold;
+        color: #00bcd4;
+    }
+
+    .ranking-number:first-child { color: gold; }
+    .ranking-number:nth-child(2) { color: silver; }
+    .ranking-number:nth-child(3) { color: #cd7f32; }
+</style>
+
+{% block extra_js %}
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+{% endblock %}
+{% endblock %}

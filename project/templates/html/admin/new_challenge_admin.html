@@ -1,0 +1,38 @@
+{% extends "html/admin/base_admin.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="admin-container"> <h1>Create New Challenge</h1>
+<form method="post" class="challenge-form">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="title">Challenge Title</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="5" required></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="expected_result">Expected Result</label>
+        <input type="number" step="0.01" id="expected_result" name="expected_result" required>
+    </div>
+
+    <div class="form-group">
+        <label for="end_time">End Time</label>
+        <input type="datetime-local" id="end_time" name="end_time" required>
+    </div>
+
+    <div class="form-group">
+        <label for="points">Reward Points</label>
+        <input type="number" id="points" name="points" min="0" required>
+    </div>
+    
+    <button type="submit" class="submit-btn">Create Challenge</button>
+</form>
+</div> <style> .admin-container { max-width: 800px; margin: 2rem auto; padding: 2rem; background: rgba(28, 28, 46, 0.9); border-radius: 10px; } .challenge-form { display: flex; flex-direction: column; gap: 1.5rem; } .form-group { display: flex; flex-direction: column; gap: 0.5rem; } label { color: #00bcd4; font-weight: 500; } input, textarea { padding: 0.8rem; background: rgba(15, 15, 26, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 5px; color: white; } .submit-btn { background: #00bcd4; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; transition: background 0.3s; } .submit-btn:hover { background: #0097a7; } </style>
+{% endblock %}

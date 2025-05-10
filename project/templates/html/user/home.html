@@ -1,0 +1,258 @@
+{% extends "html/user/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Main Container */
+    .main-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: 100px 0 50px;
+        text-align: center;
+        color: #d0d0ff;
+    }
+
+    .hero-section h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #ffffff;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        line-height: 1.2;
+    }
+
+    .highlight {
+        color: #00bcd4;
+    }
+
+    .hero-section .subtitle {
+        font-size: 1.4rem;
+        max-width: 700px;
+        margin: 0 auto 1.5rem;
+        line-height: 1.6;
+        color: #d0d0ff;
+    }
+
+    .hero-section .description {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.8;
+        color: #d0d0ff;
+    }
+
+    .cta-button {
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #fff;
+        background-color: #00bcd4;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 188, 212, 0.3);
+        border: none;
+        cursor: pointer;
+        margin: 1rem 0;
+    }
+
+    .cta-button:hover {
+        background-color: #0097a7;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 8px rgba(0, 188, 212, 0.4);
+    }
+
+    /* User Welcome Section */
+    .user-welcome {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 2.5rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        max-width: 800px;
+        margin: 3rem auto;
+        text-align: center;
+    }
+
+    .user-welcome h2 {
+        color: #ffffff;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .user-welcome p {
+        font-size: 1.2rem;
+        color: #d0d0ff;
+        margin-bottom: 1.5rem;
+    }
+
+    .points-display {
+        font-size: 1.5rem;
+        color: #00e5ff;
+        font-weight: bold;
+        margin: 1rem 0;
+    }
+
+    /* Features Section */
+    .features-section {
+        padding: 50px 0;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+        color: #fff;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-header p {
+        color: #d0d0ff;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+        font-size: 1.2rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .feature-card {
+        background-color: rgba(28, 28, 46, 0.8);
+        padding: 2rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .feature-card h3 {
+        color: #00bcd4;
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+    }
+
+    .feature-card p {
+        color: #d0d0ff;
+        line-height: 1.6;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        text-align: center;
+        margin: 4rem 0;
+    }
+
+    .cta-section p {
+        font-size: 1.3rem;
+        color: #d0d0ff;
+        margin-bottom: 2rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .hero-section {
+            padding: 80px 0 30px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.2rem;
+        }
+
+        .hero-section .subtitle {
+            font-size: 1.2rem;
+        }
+
+        .user-welcome {
+            padding: 1.5rem;
+            margin: 2rem auto;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+        }
+    }
+</style>
+
+<div class="main-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>Transform Your Business with <span class="highlight">AI-Powered Predictions</span></h1>
+        <p class="subtitle">PolyMind helps you forecast sales, understand demand, and make data-driven decisions with confidence</p>
+        <p class="description">Our advanced machine learning algorithms analyze patterns in your data to deliver accurate forecasts that help you optimize inventory, reduce waste, and maximize profits.</p>
+        <a href="{% url 'challenge' %}" class="cta-button">Start Predicting Now →</a>
+    </section>
+
+    <!-- User Welcome Section (only shown if logged in) -->
+    {% if username %}
+    <section class="user-welcome">
+        <h2>Welcome, <span class="highlight">{{ username }}</span>!</h2>
+        <p>You're doing great! Keep using PolyMind to improve your prediction skills and climb the leaderboard.</p>
+        <div class="points-display">{{ points }} Prediction Points</div>
+        <!-- <a href="{% url 'challenge' %}" class="cta-button">Continue Your Journey</a> -->
+    </section>
+    {% endif %}
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="section-header">
+            <h2>Why Choose PolyMind?</h2>
+            <p>We combine cutting-edge technology with user-friendly features to give you the best predictive analytics experience</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Smart Forecasting</h3>
+                <p>Our AI learns from your historical data to predict future sales with remarkable accuracy, helping you stay ahead of demand.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Real-Time Insights</h3>
+                <p>Get up-to-the-minute analytics and visualizations that help you spot trends and make quick decisions.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Competitive Edge</h3>
+                <p>Challenge yourself against other users in our prediction games to sharpen your forecasting skills.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Easy Integration</h3>
+                <p>Connect your existing data sources in minutes and start getting valuable insights immediately.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Customizable Dashboards</h3>
+                <p>Create personalized views that show exactly the metrics you care about most.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Expert Support</h3>
+                <p>Our team of data scientists is available to help you interpret results and optimize your forecasts.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to see the future more clearly?</h2>
+        <p>Join thousands of businesses using PolyMind to make smarter decisions every day.</p>
+        <a href="{% url 'challenge' %}" class="cta-button">Get Started Free Today</a>
+    </section>
+</div>
+{% endblock content %}

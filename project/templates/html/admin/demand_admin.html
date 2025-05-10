@@ -1,0 +1,193 @@
+{% extends "html/admin/base_admin.html" %}
+{% load static %}
+
+{% block title %}Predict{% endblock %}
+
+{% block content %}
+<style>
+    .predict-form {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: #1c1c2e;
+        border-radius: 8px;
+        color: #d0d0ff;
+    }
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    .form-control {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #2a2a3e;
+        border: 1px solid #3a3a4e;
+        border-radius: 4px;
+        color: white;
+    }
+    .submit-btn {
+        background-color: #00bcd4;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .submit-btn:hover {
+        background-color: #0097a7;
+    }
+    .prediction-card {
+        margin-top: 2rem;
+        background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+        color: #ffffff;
+        border-radius: 10px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
+        animation: fadeIn 1s ease-in-out;
+    }
+    .prediction-card h2 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    .prediction-card .icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: inline-block;
+    }
+    .prediction-card .price {
+        font-size: 2rem;
+        color: #00ffc8;
+        margin-top: 1rem;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="predict-form">
+    <h1>Sales & Demand Prediction</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="onpromotion">On Promotion</label>
+            <select id="onpromotion" name="onpromotion" class="form-control" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="dcoilwtico">Oil Price</label>
+            <input type="number" step="0.01" id="dcoilwtico" name="dcoilwtico" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="current_price">Current Price</label>
+            <input type="number" step="0.01" id="current_price" name="current_price" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="family">Product Family</label>
+            <select id="family" name="family" class="form-control" required>
+                <option value="">Select Product Family</option>
+                <option value="CELEBRATION">CELEBRATION</option>
+                <option value="BREAD/BAKERY">BREAD/BAKERY</option>
+                <option value="BOOKS">BOOKS</option>
+                <option value="BEVERAGES">BEVERAGES</option>
+                <option value="BEAUTY">BEAUTY</option>
+                <option value="BABY CARE">BABY CARE</option>
+                <option value="AUTOMOTIVE">AUTOMOTIVE</option>
+                <option value="DAIRY">DAIRY</option>
+                <option value="LIQUOR,WINE,BEER">LIQUOR,WINE,BEER</option>
+                <option value="MEATS">MEATS</option>
+                <option value="MAGAZINES">MAGAZINES</option>
+                <option value="SEAFOOD">SEAFOOD</option>
+                <option value="SCHOOL AND OFFICE SUPPLIES">SCHOOL AND OFFICE SUPPLIES</option>
+                <option value="PRODUCE">PRODUCE</option>
+                <option value="PREPARED FOODS">PREPARED FOODS</option>
+                <option value="POULTRY">POULTRY</option>
+                <option value="PLAYERS AND ELECTRONICS">PLAYERS AND ELECTRONICS</option>
+                <option value="PET SUPPLIES">PET SUPPLIES</option>
+                <option value="PERSONAL CARE">PERSONAL CARE</option>
+                <option value="HOME APPLIANCES">HOME APPLIANCES</option>
+                <option value="HOME AND KITCHEN I">HOME AND KITCHEN I</option>
+                <option value="LAWN AND GARDEN">LAWN AND GARDEN</option>
+                <option value="GROCERY II">GROCERY II</option>
+                <option value="GROCERY I">GROCERY I</option>
+                <option value="FROZEN FOODS">FROZEN FOODS</option>
+                <option value="EGGS">EGGS</option>
+                <option value="DELI">DELI</option>
+                <option value="CLEANING">CLEANING</option>
+                <option value="LINGERIE">LINGERIE</option>
+                <option value="LADIESWEAR">LADIESWEAR</option>
+                <option value="HOME AND KITCHEN II">HOME AND KITCHEN II</option>
+                <option value="HARDWARE">HARDWARE</option>
+                <option value="HOME CARE">HOME CARE</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="city">City</label>
+            <select id="city" name="city" class="form-control" required>
+                <option value="">Select City</option>
+                <option value="Salinas">Salinas</option>
+                <option value="Machala">Machala</option>
+                <option value="Quito">Quito</option>
+                <option value="Esmeraldas">Esmeraldas</option>
+                <option value="Guayaquil">Guayaquil</option>
+                <option value="Playas">Playas</option>
+                <option value="Cuenca">Cuenca</option>
+                <option value="Loja">Loja</option>
+                <option value="El Carmen">El Carmen</option>
+                <option value="Santo Domingo">Santo Domingo</option>
+                <option value="Ambato">Ambato</option>
+                <option value="Guaranda">Guaranda</option>
+                <option value="Cayambe">Cayambe</option>
+                <option value="Riobamba">Riobamba</option>
+                <option value="Ibarra">Ibarra</option>
+                <option value="Latacunga">Latacunga</option>
+                <option value="Quevedo">Quevedo</option>
+                <option value="Babahoyo">Babahoyo</option>
+                <option value="Daule">Daule</option>
+                <option value="Libertad">Libertad</option>
+                <option value="Manta">Manta</option>
+                <option value="Puyo">Puyo</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="store_type">Store Type</label>
+            <select id="store_type" name="store_type" class="form-control" required>
+                <option value="">Select Store Type</option>
+                <option value='A'>A - Supermarket (Large)</option>
+                <option value='B'>B - Supermarket (Medium)</option>
+                <option value='C'>C - Convenience Store</option>
+                <option value='D'>D - Hypermarket / Discount Store</option>
+                <option value='E'>E - Specialty Store / Wholesale</option>
+            </select>
+        </div>
+
+        <button type="submit" class="submit-btn">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <div class="prediction-card">
+        <div class="icon">📈</div>
+        <h2>Predicted Demand</h2>
+        <p class="price">{{ prediction.units_sold }} units</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
