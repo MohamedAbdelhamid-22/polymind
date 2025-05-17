@@ -1,12 +1,12 @@
 {# templates/user/base.html #}
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>PolyMind</title>
     <link rel="icon" type="image/x-icon" href="{% static 'img/logo_2.png' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -57,9 +57,12 @@
         }
 
         .brand-name {
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 800;
             color: #00bcd4;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .nav-toggle {
@@ -79,6 +82,7 @@
             display: flex;
             list-style: none;
             gap: 2rem;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -141,7 +145,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Mobile Responsive */
+        /* Responsive */
         @media (max-width: 768px) {
             .nav-wrapper {
                 flex-direction: column;
@@ -169,6 +173,40 @@
                 margin-top: 1rem;
             }
         }
+        #backToTopBtn {
+            display: none; /* Hidden initially */
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            background-color: #0ff;
+            color: #000;
+            border: none;
+            padding: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px #0ff, 0 0 30px #0ff80f80;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+
+            /* Use flex only when shown */
+            align-items: center;
+            justify-content: center;
+        }
+
+        #backToTopBtn svg {
+            width: 24px;
+            height: 24px;
+            stroke: #000;
+        }
+
+        #backToTopBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #0ff, 0 0 40px #0ff80f80;
+        }
+
+
     </style>
     {% block extra_css %}{% endblock %}
 </head>
@@ -178,7 +216,7 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="{% static 'img/logo_2.png' %}" alt="PolyMind Logo">
+                <img src="{% static 'img/logo_4.png' %}" alt="PolyMind Logo">
                 <span class="brand-name">PolyMind</span>
             </div>
 
@@ -187,6 +225,7 @@
             <div class="nav-wrapper" id="navMenu">
                 <ul class="nav-links">
                     <li><a href="{% url 'home' %}" {% if request.path == '/' %}class="active"{% endif %}>Home</a></li>
+                    <li><a href="{% url 'streamlit_dashboard' %}" {% if request.path == '/dashboard/' %}class="active"{% endif %}>Dashboard</a></li>
                     <li><a href="{% url 'challenge' %}" {% if request.path == '/challenge/' %}class="active"{% endif %}>Challenge</a></li>
                     <li><a href="{% url 'all_challenges_scoreboard' %}" {% if request.path == '/scoreboard/' %}class="active"{% endif %}>Scoreboard</a></li>
                 </ul>
@@ -197,7 +236,6 @@
             </div>
         </nav>
     </header>
-
     <div class="content-wrapper">
         {% block content %}{% endblock %}
     </div>
@@ -206,10 +244,18 @@
         <p>&copy; 2025 PolyMind. All rights reserved.</p>
     </footer>
 
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Scroll to top">
+  <!-- You can use any icon; here's an up arrow with SVG -->
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path d="M5 15l7-7 7 7" />
+  </svg>
+</button>
+
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         function toggleNav() {
-            const nav = document.getElementById('navMenu');
-            nav.classList.toggle('active');
+            document.getElementById('adminNav').classList.toggle('active');
         }
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -217,7 +263,7 @@
                 particles: {
                     number: { value: 80, density: { enable: true, value_area: 800 } },
                     color: { value: "#00bcd4" },
-                    shape: { type: "circle", stroke: { width: 0, color: "#000000" }},
+                    shape: { type: "circle", stroke: { width: 0, color: "#000" }},
                     opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }},
                     size: { value: 3, random: true },
                     line_linked: { enable: true, distance: 150, color: "#00bcd4", opacity: 0.4, width: 1 },
@@ -231,6 +277,23 @@
                 retina_detect: true
             });
         });
+        // Show button on scroll
+        window.onscroll = function () {
+        const btn = document.getElementById("backToTopBtn");
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            btn.style.display = "flex"; // Use flex here to keep centering
+        } else {
+            btn.style.display = "none";
+        }
+        };
+
+        // Scroll to top smoothly
+        function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+
+
     </script>
     {% block extra_js %}{% endblock %}
 </body>

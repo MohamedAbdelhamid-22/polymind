@@ -1,0 +1,113 @@
+{% extends "html/admin/base_admin.html" %}
+{% load static %}
+
+{% block content %}
+<div class="leaderboard-wrapper">
+    <div class="leaderboard-header">
+        <h1><i class="fas fa-trophy"></i> User Leaderboard</h1>
+        <p>Track the top performing users by points</p>
+    </div>
+
+    <div class="table-container">
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td><span class="rank-badge">{{ forloop.counter }}</span></td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.points }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No users found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+.leaderboard-wrapper {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: rgba(20, 20, 35, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.05);
+    border: 1px solid rgba(0, 188, 212, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+.leaderboard-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.leaderboard-header h1 {
+    font-size: 2.5rem;
+    color: #00bcd4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.leaderboard-header p {
+    color: #a0a0c0;
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.leaderboard-table thead {
+    background: linear-gradient(to right, #00bcd4, #3a7bd5);
+    color: #0f0f1a;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.leaderboard-table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.leaderboard-table tbody tr:hover {
+    background-color: rgba(0, 188, 212, 0.08);
+    transition: background-color 0.3s ease;
+}
+
+.rank-badge {
+    display: inline-block;
+    min-width: 30px;
+    background: rgba(0, 188, 212, 0.2);
+    color: #00bcd4;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 0.3rem 0.6rem;
+}
+</style>
+{% endblock %}
