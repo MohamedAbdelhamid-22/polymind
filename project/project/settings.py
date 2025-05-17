@@ -76,12 +76,12 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'polymind',
-        'USER': 'postgres',
-        'PASSWORD': '123456789',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'polymind',        # Make sure this database exists in MySQL
+        'USER': 'root',
+        'PASSWORD': 'M@wa1969',            # Replace with your MySQL root password
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '3306',
     }
 }
 

@@ -27,4 +27,7 @@ urlpatterns = [
     path('admin/demand/', views.demand_admin, name='demand'),
     path('end_challenge/', views.end_challenge_page, name='end_challenge_page'),
     path('end_challenge/<int:challenge_id>/', views.end_challenge, name='end_challenge'),
+    path('leaderboard/', views.leaderboard_view, name='leaderboard'),
+    # dashboard
+    path('dashboard/', views.streamlit_dashboard, name='streamlit_dashboard'),
 ]

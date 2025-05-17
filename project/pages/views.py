@@ -409,10 +409,8 @@ def predict_price(date, onpromotion, oil_price, current_price, family_encoded, s
         }
 
     chosen_action = np.random.choice(best_actions)
-    log_current_price = np.log1p(current_price)
     price_change = {0: -0.05, 1: 0.0, 2: 0.05}[chosen_action]
-    log_new_price = log_current_price + np.log1p(1 + price_change) - np.log1p(1)
-    new_price = np.expm1(log_new_price)
+    new_price = current_price * (1 + price_change)
 
     return {
         "recommended_action": chosen_action,
@@ -561,3 +559,13 @@ def demand_admin(request):
             }
         })
     return render(request, 'html/admin/demand_admin.html')
+
+# Streamlit Dashboard
+def streamlit_dashboard(request):
+    return render(request, 'html/user/Dashboard.html')
+
+
+# Leaderboard View
+def leaderboard_view(request):
+    users = User.objects.filter(user_type='user').order_by('-points')
+    return render(request, 'html/admin/leaderboard.html', {'users': users})

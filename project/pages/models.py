@@ -49,7 +49,7 @@ class ChallengeResult(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     challenge = models.ForeignKey('Challenge', on_delete=models.CASCADE)
     accuracy = models.FloatField()
-    submitted_at = models.DateTimeField(auto_now_add=True)
+    # submitted_at = models.DateTimeField(auto_now_add=True)
 
 
     class Meta:
