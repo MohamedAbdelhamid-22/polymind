@@ -102,7 +102,8 @@ Connect with us on LinkedIn:
 - [Akram Gamal](https://www.linkedin.com/in/akram-gamal-mohamed/)
 - [Alaa Eid](https://www.linkedin.com/in/alaa-e-abd-elwahhab-ae/)
 - [Tarek Adel](https://www.linkedin.com/in/tarek-adell/)
-- Yosef Ahmed
+- [Yosef Shabaan](https://www.linkedin.com/in/yosef-shabaan-231546341)
+
 
 ## 🤝 Contributing
 
